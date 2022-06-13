@@ -1,18 +1,18 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class MusicPlayer {
-    //private Music music;
-
-    private List<Music> musicList = new ArrayList<>();
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
+    private Music music;
+    @Value("${musicPlayer.name}")
     private String name;
+    @Value("${musicPlayer.volume}")
     private int volume;
 
     public String getName() {
@@ -30,11 +30,19 @@ public class MusicPlayer {
     public void setVolume(int volume) {
         this.volume = volume;
     }
+// private List<Music> musicList = new ArrayList<>();
+
+    //public void setMusicList(List<Music> musicList) {
+     //   this.musicList = musicList;
+    //}
+
+
 
     //ioc
-    //public MusicPlayer (Music music) {
-    //    this.music=music;
-    //}
+    @Autowired
+    public MusicPlayer ( @Qualifier("rapMusic")Music music) {
+       this.music=music;
+   }
 
     //public MusicPlayer () {
     //}
@@ -43,13 +51,13 @@ public class MusicPlayer {
     //    this.music = music;
     //}
 
-   // public void playMusic() {
-   //     System.out.println("Playing -> " + music.getSong());
-   // }
+   public void playMusic() {
+       System.out.println("Playing -> " + music.getSong());
+   }
 
-    public void playMusicList() {
-        for(Music music : musicList) {
-            System.out.println("Playing -> " + music.getSong());
-        }
-    }
+  //  public void playMusicList() {
+   //     for(Music music : musicList) {
+    //        System.out.println("Playing -> " + music.getSong());
+     //   }
+   // }
 }
