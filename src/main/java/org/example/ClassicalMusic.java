@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.*;
 
 @Component
-@Scope("singleton")
+@Scope("prototype")
 public class ClassicalMusic implements Music {
     @PostConstruct
     public void InitMethod () {
